@@ -16,6 +16,11 @@ import Tables from './pages/Tables';
 import Alerts from './pages/UiElements/Alerts';
 import Buttons from './pages/UiElements/Buttons';
 import DefaultLayout from './layout/DefaultLayout';
+import Contact from './pages/Contact';
+import Contrat from './pages/Contrat';
+import Utilisateurs from './pages/Utilisateurs';
+import Entreprise from './pages/Entreprise';
+import Partenaire from './pages/Partenaire'; // Import du composant Partenaire
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -40,6 +45,51 @@ function App() {
             <>
               <PageTitle title="eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
               <ECommerce />
+            </>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <>
+              <PageTitle title="Contact | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <Contact />
+            </>
+          }
+        />
+        <Route
+          path="/contrat"
+          element={
+            <>
+              <PageTitle title="Contrats | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <Contrat />
+            </>
+          }
+        />
+        <Route
+          path="/utilisateurs"
+          element={
+            <>
+              <PageTitle title="Utilisateurs | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <Utilisateurs />
+            </>
+          }
+        />
+        <Route
+          path="/entreprise"
+          element={
+            <>
+              <PageTitle title="Entreprise | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <Entreprise />
+            </>
+          }
+        />
+        <Route
+          path="/partenaire" // Ajout de la route Partenaire
+          element={
+            <>
+              <PageTitle title="Partenaire | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+              <Partenaire />
             </>
           }
         />

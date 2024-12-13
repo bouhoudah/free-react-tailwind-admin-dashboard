@@ -196,6 +196,161 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </SidebarLinkGroup>
               {/* <!-- Menu Item Dashboard --> */}
 
+          {/* <!-- Menu Item Utilisateurs --> */}
+<li>
+  <NavLink
+    to="/utilisateurs"
+    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+      pathname.includes('utilisateurs') && 'bg-graydark dark:bg-meta-4'
+    }`}
+  >
+    <svg
+      className="fill-current"
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M9 0C10.3261 0 11.5979 0.526784 12.5355 1.46447C13.4732 2.40215 14 3.67392 14 5C14 6.32608 13.4732 7.59785 12.5355 8.53553C11.5979 9.47322 10.3261 10 9 10C7.67392 10 6.40215 9.47322 5.46447 8.53553C4.52678 7.59785 4 6.32608 4 5C4 3.67392 4.52678 2.40215 5.46447 1.46447C6.40215 0.526784 7.67392 0 9 0ZM9 1.5C8.20435 1.5 7.44129 1.81607 6.87868 2.37868C6.31607 2.94129 6 3.70435 6 4.5C6 5.29565 6.31607 6.05871 6.87868 6.62132C7.44129 7.18393 8.20435 7.5 9 7.5C9.79565 7.5 10.5587 7.18393 11.1213 6.62132C11.6839 6.05871 12 5.29565 12 4.5C12 3.70435 11.6839 2.94129 11.1213 2.37868C10.5587 1.81607 9.79565 1.5 9 1.5ZM3 12C3.79565 12 4.55871 12.3161 5.12132 12.8787C5.68393 13.4413 6 14.2044 6 15H0C0 14.2044 0.31607 13.4413 0.87868 12.8787C1.44129 12.3161 2.20435 12 3 12ZM9 12C10.3261 12 11.5979 12.5268 12.5355 13.4645C13.4732 14.4021 14 15.6739 14 17H4C4 15.6739 4.52678 14.4021 5.46447 13.4645C6.40215 12.5268 7.67392 12 9 12ZM15 13.5H18V15H15V13.5ZM15 10.5H18V12H15V10.5Z"
+        fill=""
+      />
+    </svg>
+    Utilisateurs
+  </NavLink>
+</li>
+{/* <!-- Menu Item Utilisateurs --> */}
+
+
+              {/* Menu Item Contact */}
+<li>
+  <NavLink
+    to="/contact"
+    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+      pathname.includes('contact') && 'bg-graydark dark:bg-meta-4'
+    }`}
+  >
+    <svg
+      className="fill-current"
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12.7 0C14.46 0 15.92 1.46 15.92 3.2C15.92 4.94 14.46 6.4 12.7 6.4C10.94 6.4 9.48 4.94 9.48 3.2C9.48 1.46 10.94 0 12.7 0ZM0 14.8C0 11.96 5.08 10.56 8.48 10.56C11.88 10.56 17 11.96 17 14.8V17H0V14.8Z"
+        fill=""
+      />
+    </svg>
+    Contacts
+  </NavLink>
+</li>
+
+
+        <ul className="mb-6 flex flex-col gap-1.5">
+          {/* Contracts Menu Item */}
+          <li>
+            <NavLink
+              to="/contract"
+              className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                pathname.includes('contracts') && 'bg-graydark dark:bg-meta-4'
+              }`}
+            >
+              <svg
+                className="fill-current"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 0H15C16.1 0 17 0.9 17 2V16C17 17.1 16.1 18 15 18H3C1.9 18 1 17.1 1 16V2C1 0.9 1.9 0 3 0ZM15 2H3V16H15V2ZM5 4H13V6H5V4ZM5 8H13V10H5V8ZM5 12H9V14H5V12Z"
+                  fill=""
+                />
+              </svg>
+              Contrats
+            </NavLink>
+          </li>
+          {/* <!-- Menu Item Entreprise --> */}
+<li>
+  <NavLink
+    to="/entreprise"
+    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+      pathname.includes('entreprise') && 'bg-graydark dark:bg-meta-4'
+    }`}
+  >
+    <svg
+      className="fill-current"
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M15 0H3C2.44772 0 2 0.447715 2 1V17C2 17.5523 2.44772 18 3 18H15C15.5523 18 16 17.5523 16 17V1C16 0.447715 15.5523 0 15 0ZM8 16H4V12H8V16ZM8 10H4V6H8V10ZM8 4H4V2H8V4ZM14 16H10V12H14V16ZM14 10H10V6H14V10ZM14 4H10V2H14V4Z"
+        fill=""
+      />
+    </svg>
+    Entreprises
+  </NavLink>
+</li>
+{/* <!-- Menu Item Entreprise --> */}
+{/* <!-- Menu Item Partenaires --> */}
+<li>
+  <NavLink
+    to="/partenaire"
+    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+      pathname.includes('partenaire') && 'bg-graydark dark:bg-meta-4'
+    }`}
+  >
+    <svg
+      className="fill-current"
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M9 0C4.03 0 0 4.03 0 9C0 13.97 4.03 18 9 18C13.97 18 18 13.97 18 9C18 4.03 13.97 0 9 0ZM9 16.2C5.016 16.2 1.8 12.984 1.8 9C1.8 5.016 5.016 1.8 9 1.8C12.984 1.8 16.2 5.016 16.2 9C16.2 12.984 12.984 16.2 9 16.2ZM9.9 6H8.1V9.9H12V8.1H9.9V6ZM5.4 8.1H6.6V9.9H5.4V8.1ZM11.4 9.9H12.6V8.1H11.4V9.9Z"
+        fill=""
+      />
+    </svg>
+    Partenaires
+  </NavLink>
+</li>
+{/* <!-- Menu Item Produits --> */}
+<li>
+  <NavLink
+    to="/produits"
+    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+      pathname.includes('produits') && 'bg-graydark dark:bg-meta-4'
+    }`}
+  >
+    <svg
+      className="fill-current"
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4.5 0C3.675 0 3 0.675 3 1.5V3H1.5C0.675 3 0 3.675 0 4.5V16.5C0 17.325 0.675 18 1.5 18H16.5C17.325 18 18 17.325 18 16.5V4.5C18 3.675 17.325 3 16.5 3H15V1.5C15 0.675 14.325 0 13.5 0H4.5ZM4.5 1.5H13.5V3H4.5V1.5ZM1.5 4.5H16.5V7.5H1.5V4.5ZM1.5 9H16.5V16.5H1.5V9Z"
+        fill=""
+      />
+    </svg>
+    Produits
+  </NavLink>
+</li>
+
+
+
+        </ul>
               {/* <!-- Menu Item Calendar --> */}
               <li>
                 <NavLink
@@ -218,9 +373,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       fill=""
                     />
                   </svg>
+                  
+                  
+                  
                   Calendar
                 </NavLink>
               </li>
+              
               {/* <!-- Menu Item Calendar --> */}
 
               {/* <!-- Menu Item Profile --> */}
