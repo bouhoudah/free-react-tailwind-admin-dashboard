@@ -2,11 +2,14 @@
   "name": "tailadmin-react-free",
   "private": true,
   "version": "1.3.8",
+  "homepage":"https://bouhoudah.github.io/version_test_1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "author": {
     "name": "TailAdmin",
@@ -34,6 +37,7 @@
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.14",
     "file-loader": "^6.2.0",
+    "gh-pages": "^6.2.0",
     "postcss": "^8.4.27",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.4.1",

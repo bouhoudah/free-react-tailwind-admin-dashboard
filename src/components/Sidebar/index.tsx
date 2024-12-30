@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
-import Logo from '../../images/logo/logo.svg';
+import Logo from '../../images/logo/smile.svg';
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -63,9 +63,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
-      <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+      <div className="flex items-center justify-between gap-2 px-6 py-4 lg:py-5">
         <NavLink to="/">
-          <img src={Logo} alt="Logo" />
+        <img src={Logo} alt="Logo" style={{ width: '100px', height: 'auto' }} />
         </NavLink>
 
         <button
@@ -97,7 +97,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
           {/* <!-- Menu Group --> */}
           <div>
-            <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
+            <h3 className="mb-3 ml-4 text-sm font-semibold text-bodydark2">
               MENU
             </h3>
 
@@ -150,7 +150,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             fill=""
                           />
                         </svg>
-                        Dashboard
+                        Tableau de bord
                         <svg
                           className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
                             open && 'rotate-180'
@@ -175,19 +175,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           !open && 'hidden'
                         }`}
                       >
-                        <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
-                          <li>
-                            <NavLink
-                              to="/"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
-                              }
-                            >
-                              eCommerce
-                            </NavLink>
-                          </li>
-                        </ul>
+                        
                       </div>
                       {/* <!-- Dropdown Menu End --> */}
                     </React.Fragment>
@@ -196,34 +184,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               </SidebarLinkGroup>
               {/* <!-- Menu Item Dashboard --> */}
 
-          {/* <!-- Menu Item Utilisateurs --> */}
-<li>
-  <NavLink
-    to="/utilisateurs"
-    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-      pathname.includes('utilisateurs') && 'bg-graydark dark:bg-meta-4'
-    }`}
-  >
-    <svg
-      className="fill-current"
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M9 0C10.3261 0 11.5979 0.526784 12.5355 1.46447C13.4732 2.40215 14 3.67392 14 5C14 6.32608 13.4732 7.59785 12.5355 8.53553C11.5979 9.47322 10.3261 10 9 10C7.67392 10 6.40215 9.47322 5.46447 8.53553C4.52678 7.59785 4 6.32608 4 5C4 3.67392 4.52678 2.40215 5.46447 1.46447C6.40215 0.526784 7.67392 0 9 0ZM9 1.5C8.20435 1.5 7.44129 1.81607 6.87868 2.37868C6.31607 2.94129 6 3.70435 6 4.5C6 5.29565 6.31607 6.05871 6.87868 6.62132C7.44129 7.18393 8.20435 7.5 9 7.5C9.79565 7.5 10.5587 7.18393 11.1213 6.62132C11.6839 6.05871 12 5.29565 12 4.5C12 3.70435 11.6839 2.94129 11.1213 2.37868C10.5587 1.81607 9.79565 1.5 9 1.5ZM3 12C3.79565 12 4.55871 12.3161 5.12132 12.8787C5.68393 13.4413 6 14.2044 6 15H0C0 14.2044 0.31607 13.4413 0.87868 12.8787C1.44129 12.3161 2.20435 12 3 12ZM9 12C10.3261 12 11.5979 12.5268 12.5355 13.4645C13.4732 14.4021 14 15.6739 14 17H4C4 15.6739 4.52678 14.4021 5.46447 13.4645C6.40215 12.5268 7.67392 12 9 12ZM15 13.5H18V15H15V13.5ZM15 10.5H18V12H15V10.5Z"
-        fill=""
-      />
-    </svg>
-    Utilisateurs
-  </NavLink>
-</li>
-{/* <!-- Menu Item Utilisateurs --> */}
-
-
-              {/* Menu Item Contact */}
+                      {/* Menu Item Contact */}
 <li>
   <NavLink
     to="/contact"
@@ -247,6 +208,33 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     Contacts
   </NavLink>
 </li>
+
+{/* <!-- Menu Item Clients --> */}
+<li>
+  <NavLink
+    to="/clients"
+    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+      pathname.includes('clients') && 'bg-graydark dark:bg-meta-4'
+    }`}
+  >
+    <svg
+      className="fill-current"
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M9 0C10.3261 0 11.5979 0.526784 12.5355 1.46447C13.4732 2.40215 14 3.67392 14 5C14 6.32608 13.4732 7.59785 12.5355 8.53553C11.5979 9.47322 10.3261 10 9 10C7.67392 10 6.40215 9.47322 5.46447 8.53553C4.52678 7.59785 4 6.32608 4 5C4 3.67392 4.52678 2.40215 5.46447 1.46447C6.40215 0.526784 7.67392 0 9 0ZM9 1.5C8.20435 1.5 7.44129 1.81607 6.87868 2.37868C6.31607 2.94129 6 3.70435 6 4.5C6 5.29565 6.31607 6.05871 6.87868 6.62132C7.44129 7.18393 8.20435 7.5 9 7.5C9.79565 7.5 10.5587 7.18393 11.1213 6.62132C11.6839 6.05871 12 5.29565 12 4.5C12 3.70435 11.6839 2.94129 11.1213 2.37868C10.5587 1.81607 9.79565 1.5 9 1.5ZM3 12C3.79565 12 4.55871 12.3161 5.12132 12.8787C5.68393 13.4413 6 14.2044 6 15H0C0 14.2044 0.31607 13.4413 0.87868 12.8787C1.44129 12.3161 2.20435 12 3 12ZM9 12C10.3261 12 11.5979 12.5268 12.5355 13.4645C13.4732 14.4021 14 15.6739 14 17H4C4 15.6739 4.52678 14.4021 5.46447 13.4645C6.40215 12.5268 7.67392 12 9 12ZM15 13.5H18V15H15V13.5ZM15 10.5H18V12H15V10.5Z"
+        fill=""
+      />
+    </svg>
+    Clients
+  </NavLink>
+</li>
+{/* <!-- Menu Item Clients --> */}
+
 
 
         <ul className="mb-6 flex flex-col gap-1.5">
@@ -274,12 +262,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
               Contrats
             </NavLink>
           </li>
-          {/* <!-- Menu Item Entreprise --> */}
+         {/* <!-- Menu Item Prospect --> */}
 <li>
   <NavLink
-    to="/entreprise"
+    to="/prospect"
     className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-      pathname.includes('entreprise') && 'bg-graydark dark:bg-meta-4'
+      pathname.includes('prospect') && 'bg-graydark dark:bg-meta-4'
     }`}
   >
     <svg
@@ -295,10 +283,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         fill=""
       />
     </svg>
-    Entreprises
+    Prospects
   </NavLink>
 </li>
-{/* <!-- Menu Item Entreprise --> */}
+{/* <!-- Menu Item Prospect --> */}
+
 {/* <!-- Menu Item Partenaires --> */}
 <li>
   <NavLink
@@ -323,30 +312,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
     Partenaires
   </NavLink>
 </li>
-{/* <!-- Menu Item Produits --> */}
-<li>
-  <NavLink
-    to="/produits"
-    className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
-      pathname.includes('produits') && 'bg-graydark dark:bg-meta-4'
-    }`}
-  >
-    <svg
-      className="fill-current"
-      width="18"
-      height="18"
-      viewBox="0 0 18 18"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M4.5 0C3.675 0 3 0.675 3 1.5V3H1.5C0.675 3 0 3.675 0 4.5V16.5C0 17.325 0.675 18 1.5 18H16.5C17.325 18 18 17.325 18 16.5V4.5C18 3.675 17.325 3 16.5 3H15V1.5C15 0.675 14.325 0 13.5 0H4.5ZM4.5 1.5H13.5V3H4.5V1.5ZM1.5 4.5H16.5V7.5H1.5V4.5ZM1.5 9H16.5V16.5H1.5V9Z"
-        fill=""
-      />
-    </svg>
-    Produits
-  </NavLink>
-</li>
+
 
 
 
