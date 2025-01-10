@@ -1,28 +1,35 @@
-// Contacts.js
-import React, { useState } from "react";
-import { useContacts } from "../pages/ContactContext"; // Importer le contexte
-import { Contact } from "../pages/ContactContext"; // Mettez le chemin correct
+import React, { useEffect, useState } from "react";
+import { useContacts } from "../pages/ContactContext"; // Importer le contexte des contacts
 
-const Contacts = () => {
+const Clients = () => {
   const { contacts, addContact, updateContact, deleteContact } = useContacts();
+  const [clients, setClients] = useState(
+    contacts.filter((contact) => contact.status === "client")
+  );
   const [showForm, setShowForm] = useState(false);
-  const [editingContact, setEditingContact] = useState<Contact | null>(null);
-  const [newContact, setNewContact] = useState<Contact>({
+  const [newClient, setNewClient] = useState({
     id: 0,
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     type: "Particulier",
-    status: "contact", // Par défaut pour un nouveau contact
+    status: "client", // Statut par défaut pour un nouveau client
     photo: "",
   });
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const updatedClients = contacts.filter((contact) => contact.status === "client");
+    setClients(updatedClients);
+  }, [contacts]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setNewContact({ ...newContact, [name]: value });
+    setNewClient({ ...newClient, [name]: value });
   };
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +37,8 @@ const Contacts = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setNewContact({ ...newContact, photo: reader.result as string });
+        setPhotoPreview(reader.result as string);
+        setNewClient({ ...newClient, photo: reader.result as string });
       };
       reader.readAsDataURL(file);
     }
@@ -40,73 +48,64 @@ const Contacts = () => {
     e.preventDefault();
 
     const phoneRegex = /^\+33\d{9}$/; // Format téléphone
-    if (!phoneRegex.test(newContact.phone)) {
+    if (!phoneRegex.test(newClient.phone)) {
       setError("Le numéro de téléphone doit être au format +33XXXXXXXXX.");
       return;
     }
 
-    setError(""); // Réinitialiser les erreurs
-    if (editingContact) {
-      updateContact(newContact); // Modifier un contact existant
-      setEditingContact(null);
+    setError("");
+    if (newClient.id) {
+      updateContact(newClient);
     } else {
       const newId = contacts.length ? contacts[contacts.length - 1].id + 1 : 1;
-      addContact({ ...newContact, id: newId }); // Ajouter un nouveau contact
+      addContact({ ...newClient, id: newId });
     }
-
     setShowForm(false);
-    setNewContact({
+    setNewClient({
       id: 0,
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       phone: "",
       type: "Particulier",
-      status: "contact",
+      status: "client",
       photo: "",
     });
-  };
-
-  const handleEdit = (contact: Contact) => {
-    setEditingContact(contact);
-    setNewContact(contact);
-    setShowForm(true);
+    setPhotoPreview(null);
   };
 
   const handleDelete = (id: number) => {
-    deleteContact(id);
+    deleteContact(id); // Supprimer le contact
+  };
+
+  const handleEdit = (id: number) => {
+    const clientToEdit = clients.find((client) => client.id === id);
+    if (clientToEdit) {
+      setNewClient(clientToEdit);
+      setPhotoPreview(clientToEdit.photo);
+      setShowForm(true);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-100 p-8 relative">
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <header className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-700">Contacts</h1>
+          <h1 className="text-2xl font-bold text-gray-700">Clients</h1>
           <button
-            onClick={() => {
-              setShowForm(true);
-              setEditingContact(null);
-              setNewContact({
-                id: 0,
-                name: "",
-                email: "",
-                phone: "",
-                type: "Particulier",
-                status: "contact",
-                photo: "",
-              });
-            }}
+            onClick={() => setShowForm(true)}
             className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700"
           >
-            + Nouveau contact
+            + Nouveau client
           </button>
         </header>
 
         {showForm && (
-          <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-1/2">
+          <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-999">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-1/2 relative z-999">
               <header className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold text-gray-700">
-                  {editingContact ? "Modifier le contact" : "Nouveau contact"}
+                  {newClient.id ? "Modifier le client" : "Nouveau client"}
                 </h2>
                 <button
                   onClick={() => setShowForm(false)}
@@ -118,9 +117,9 @@ const Contacts = () => {
               <form onSubmit={handleFormSubmit} className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <div className="w-24 h-24 border rounded-full overflow-hidden bg-gray-200">
-                    {newContact.photo ? (
+                    {photoPreview ? (
                       <img
-                        src={newContact.photo}
+                        src={photoPreview}
                         alt="Prévisualisation"
                         className="w-full h-full object-cover"
                       />
@@ -132,7 +131,7 @@ const Contacts = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Photo
+                      Ajouter photo
                     </label>
                     <input
                       type="file"
@@ -145,12 +144,12 @@ const Contacts = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Nom
+                      Prénom
                     </label>
                     <input
                       type="text"
-                      name="name"
-                      value={newContact.name}
+                      name="firstName"
+                      value={newClient.firstName}
                       onChange={handleInputChange}
                       className="w-full border rounded-lg p-2"
                       required
@@ -158,12 +157,12 @@ const Contacts = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Email
+                      Nom
                     </label>
                     <input
-                      type="email"
-                      name="email"
-                      value={newContact.email}
+                      type="text"
+                      name="lastName"
+                      value={newClient.lastName}
                       onChange={handleInputChange}
                       className="w-full border rounded-lg p-2"
                       required
@@ -172,12 +171,25 @@ const Contacts = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={newClient.email}
+                    onChange={handleInputChange}
+                    className="w-full border rounded-lg p-2"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
                     Téléphone
                   </label>
                   <input
                     type="text"
                     name="phone"
-                    value={newContact.phone}
+                    value={newClient.phone}
                     onChange={handleInputChange}
                     className="w-full border rounded-lg p-2"
                     placeholder="+33XXXXXXXXX"
@@ -192,7 +204,7 @@ const Contacts = () => {
                     </label>
                     <select
                       name="type"
-                      value={newContact.type}
+                      value={newClient.type}
                       onChange={handleInputChange}
                       className="w-full border rounded-lg p-2"
                     >
@@ -207,12 +219,11 @@ const Contacts = () => {
                     </label>
                     <select
                       name="status"
-                      value={newContact.status}
+                      value={newClient.status}
                       onChange={handleInputChange}
                       className="w-full border rounded-lg p-2"
+                      disabled
                     >
-                      <option value="contact">Contact</option>
-                      <option value="prospect">Prospect</option>
                       <option value="client">Client</option>
                     </select>
                   </div>
@@ -229,7 +240,7 @@ const Contacts = () => {
                     type="submit"
                     className="bg-blue-600 text-white px-4 py-2 rounded-lg"
                   >
-                    {editingContact ? "Modifier" : "Créer"}
+                    {newClient.id ? "Modifier" : "Ajouter"}
                   </button>
                 </div>
               </form>
@@ -237,43 +248,44 @@ const Contacts = () => {
           </div>
         )}
 
-        <div className="bg-white rounded-lg shadow mt-8">
+        <div className="bg-white rounded-lg shadow overflow-hidden">
           <table className="w-full text-left">
             <thead className="bg-gray-200">
               <tr>
-                <th className="px-4 py-2">Photo</th>
-                <th className="px-4 py-2">Nom</th>
+                <th className="px-4 py-2">Contact</th>
                 <th className="px-4 py-2">Email</th>
                 <th className="px-4 py-2">Téléphone</th>
                 <th className="px-4 py-2">Type</th>
-                <th className="px-4 py-2">Statut</th>
                 <th className="px-4 py-2">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {contacts.map((contact) => (
-                <tr key={contact.id} className="border-t hover:bg-gray-100">
-                  <td className="px-4 py-2">
+              {clients.map((client) => (
+                <tr key={client.id} className="border-t hover:bg-gray-100">
+                  <td className="px-4 py-2 flex items-center gap-2">
                     <img
-                      src={contact.photo || "https://via.placeholder.com/50"}
-                      alt={contact.name}
+                      src={client.photo || "https://via.placeholder.com/50"}
+                      alt={client.firstName}
                       className="w-10 h-10 rounded-full"
                     />
+                    <div>
+                      <p>
+                        {client.firstName} {client.lastName}
+                      </p>
+                    </div>
                   </td>
-                  <td className="px-4 py-2">{contact.name}</td>
-                  <td className="px-4 py-2">{contact.email}</td>
-                  <td className="px-4 py-2">{contact.phone}</td>
-                  <td className="px-4 py-2">{contact.type}</td>
-                  <td className="px-4 py-2">{contact.status}</td>
+                  <td className="px-4 py-2">{client.email}</td>
+                  <td className="px-4 py-2">{client.phone}</td>
+                  <td className="px-4 py-2">{client.type}</td>
                   <td className="px-4 py-2 flex gap-2">
                     <button
-                      onClick={() => handleEdit(contact)}
+                      onClick={() => handleEdit(client.id)}
                       className="text-blue-500 hover:text-blue-700"
                     >
                       <i className="fa-solid fa-pen"></i>
                     </button>
                     <button
-                      onClick={() => handleDelete(contact.id)}
+                      onClick={() => handleDelete(client.id)}
                       className="text-red-500 hover:text-red-700"
                     >
                       <i className="fa-solid fa-trash"></i>
@@ -289,4 +301,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default Clients;

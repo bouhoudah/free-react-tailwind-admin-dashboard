@@ -1,19 +1,18 @@
-// Contacts.js
 import React, { useState } from "react";
 import { useContacts } from "../pages/ContactContext"; // Importer le contexte
 import { Contact } from "../pages/ContactContext"; // Mettez le chemin correct
 
-const Contacts = () => {
+const Prospects = () => {
   const { contacts, addContact, updateContact, deleteContact } = useContacts();
   const [showForm, setShowForm] = useState(false);
-  const [editingContact, setEditingContact] = useState<Contact | null>(null);
-  const [newContact, setNewContact] = useState<Contact>({
+  const [editingProspect, setEditingProspect] = useState<Contact | null>(null);
+  const [newProspect, setNewProspect] = useState<Contact>({
     id: 0,
     name: "",
     email: "",
     phone: "",
     type: "Particulier",
-    status: "contact", // Par défaut pour un nouveau contact
+    status: "prospect",
     photo: "",
   });
   const [error, setError] = useState("");
@@ -22,7 +21,7 @@ const Contacts = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setNewContact({ ...newContact, [name]: value });
+    setNewProspect({ ...newProspect, [name]: value });
   };
 
   const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +29,7 @@ const Contacts = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setNewContact({ ...newContact, photo: reader.result as string });
+        setNewProspect({ ...newProspect, photo: reader.result as string });
       };
       reader.readAsDataURL(file);
     }
@@ -40,35 +39,35 @@ const Contacts = () => {
     e.preventDefault();
 
     const phoneRegex = /^\+33\d{9}$/; // Format téléphone
-    if (!phoneRegex.test(newContact.phone)) {
+    if (!phoneRegex.test(newProspect.phone)) {
       setError("Le numéro de téléphone doit être au format +33XXXXXXXXX.");
       return;
     }
 
     setError(""); // Réinitialiser les erreurs
-    if (editingContact) {
-      updateContact(newContact); // Modifier un contact existant
-      setEditingContact(null);
+    if (editingProspect) {
+      updateContact(newProspect); // Modifier un prospect
+      setEditingProspect(null);
     } else {
       const newId = contacts.length ? contacts[contacts.length - 1].id + 1 : 1;
-      addContact({ ...newContact, id: newId }); // Ajouter un nouveau contact
+      addContact({ ...newProspect, id: newId }); // Ajouter un prospect
     }
 
     setShowForm(false);
-    setNewContact({
+    setNewProspect({
       id: 0,
       name: "",
       email: "",
       phone: "",
       type: "Particulier",
-      status: "contact",
+      status: "prospect",
       photo: "",
     });
   };
 
-  const handleEdit = (contact: Contact) => {
-    setEditingContact(contact);
-    setNewContact(contact);
+  const handleEdit = (prospect: Contact) => {
+    setEditingProspect(prospect);
+    setNewProspect(prospect);
     setShowForm(true);
   };
 
@@ -79,34 +78,36 @@ const Contacts = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="bg-white p-6 rounded-lg shadow-lg">
+        {/* Header */}
         <header className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-700">Contacts</h1>
+          <h1 className="text-2xl font-bold text-gray-700">Prospects</h1>
           <button
             onClick={() => {
               setShowForm(true);
-              setEditingContact(null);
-              setNewContact({
+              setEditingProspect(null);
+              setNewProspect({
                 id: 0,
                 name: "",
                 email: "",
                 phone: "",
                 type: "Particulier",
-                status: "contact",
+                status: "prospect",
                 photo: "",
               });
             }}
             className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700"
           >
-            + Nouveau contact
+            + Nouveau prospect
           </button>
         </header>
 
+        {/* Formulaire */}
         {showForm && (
           <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
             <div className="bg-white p-6 rounded-lg shadow-lg w-1/2">
               <header className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-bold text-gray-700">
-                  {editingContact ? "Modifier le contact" : "Nouveau contact"}
+                  {editingProspect ? "Modifier le prospect" : "Nouveau prospect"}
                 </h2>
                 <button
                   onClick={() => setShowForm(false)}
@@ -118,9 +119,9 @@ const Contacts = () => {
               <form onSubmit={handleFormSubmit} className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <div className="w-24 h-24 border rounded-full overflow-hidden bg-gray-200">
-                    {newContact.photo ? (
+                    {newProspect.photo ? (
                       <img
-                        src={newContact.photo}
+                        src={newProspect.photo}
                         alt="Prévisualisation"
                         className="w-full h-full object-cover"
                       />
@@ -150,7 +151,7 @@ const Contacts = () => {
                     <input
                       type="text"
                       name="name"
-                      value={newContact.name}
+                      value={newProspect.name}
                       onChange={handleInputChange}
                       className="w-full border rounded-lg p-2"
                       required
@@ -163,7 +164,7 @@ const Contacts = () => {
                     <input
                       type="email"
                       name="email"
-                      value={newContact.email}
+                      value={newProspect.email}
                       onChange={handleInputChange}
                       className="w-full border rounded-lg p-2"
                       required
@@ -177,7 +178,7 @@ const Contacts = () => {
                   <input
                     type="text"
                     name="phone"
-                    value={newContact.phone}
+                    value={newProspect.phone}
                     onChange={handleInputChange}
                     className="w-full border rounded-lg p-2"
                     placeholder="+33XXXXXXXXX"
@@ -192,28 +193,13 @@ const Contacts = () => {
                     </label>
                     <select
                       name="type"
-                      value={newContact.type}
+                      value={newProspect.type}
                       onChange={handleInputChange}
                       className="w-full border rounded-lg p-2"
                     >
                       <option value="Particulier">Particulier</option>
                       <option value="Professionnel">Professionnel</option>
                       <option value="Mixte">Mixte</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Statut
-                    </label>
-                    <select
-                      name="status"
-                      value={newContact.status}
-                      onChange={handleInputChange}
-                      className="w-full border rounded-lg p-2"
-                    >
-                      <option value="contact">Contact</option>
-                      <option value="prospect">Prospect</option>
-                      <option value="client">Client</option>
                     </select>
                   </div>
                 </div>
@@ -229,7 +215,7 @@ const Contacts = () => {
                     type="submit"
                     className="bg-blue-600 text-white px-4 py-2 rounded-lg"
                   >
-                    {editingContact ? "Modifier" : "Créer"}
+                    {editingProspect ? "Modifier" : "Créer"}
                   </button>
                 </div>
               </form>
@@ -237,6 +223,7 @@ const Contacts = () => {
           </div>
         )}
 
+        {/* Liste des prospects */}
         <div className="bg-white rounded-lg shadow mt-8">
           <table className="w-full text-left">
             <thead className="bg-gray-200">
@@ -246,41 +233,41 @@ const Contacts = () => {
                 <th className="px-4 py-2">Email</th>
                 <th className="px-4 py-2">Téléphone</th>
                 <th className="px-4 py-2">Type</th>
-                <th className="px-4 py-2">Statut</th>
                 <th className="px-4 py-2">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {contacts.map((contact) => (
-                <tr key={contact.id} className="border-t hover:bg-gray-100">
-                  <td className="px-4 py-2">
-                    <img
-                      src={contact.photo || "https://via.placeholder.com/50"}
-                      alt={contact.name}
-                      className="w-10 h-10 rounded-full"
-                    />
-                  </td>
-                  <td className="px-4 py-2">{contact.name}</td>
-                  <td className="px-4 py-2">{contact.email}</td>
-                  <td className="px-4 py-2">{contact.phone}</td>
-                  <td className="px-4 py-2">{contact.type}</td>
-                  <td className="px-4 py-2">{contact.status}</td>
-                  <td className="px-4 py-2 flex gap-2">
-                    <button
-                      onClick={() => handleEdit(contact)}
-                      className="text-blue-500 hover:text-blue-700"
-                    >
-                      <i className="fa-solid fa-pen"></i>
-                    </button>
-                    <button
-                      onClick={() => handleDelete(contact.id)}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      <i className="fa-solid fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {contacts
+                .filter((contact) => contact.status === "prospect")
+                .map((prospect) => (
+                  <tr key={prospect.id} className="border-t hover:bg-gray-100">
+                    <td className="px-4 py-2">
+                      <img
+                        src={prospect.photo || "default-image-url"}
+                        alt={prospect.name}
+                        className="w-10 h-10 rounded-full"
+                      />
+                    </td>
+                    <td className="px-4 py-2">{prospect.name}</td>
+                    <td className="px-4 py-2">{prospect.email}</td>
+                    <td className="px-4 py-2">{prospect.phone}</td>
+                    <td className="px-4 py-2">{prospect.type}</td>
+                    <td className="px-4 py-2 flex gap-2">
+                      <button
+                        onClick={() => handleEdit(prospect)}
+                        className="text-blue-600 hover:text-blue-800"
+                      >
+                        <i className="fas fa-pen"></i>
+                      </button>
+                      <button
+                        onClick={() => handleDelete(prospect.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        <i className="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
@@ -289,4 +276,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default Prospects;

@@ -2,7 +2,7 @@
   "name": "tailadmin-react-free",
   "private": true,
   "version": "1.3.8",
-  "homepage":"https://bouhoudah.github.io/version_test_1",
+  "homepage": "https://bouhoudah.github.io/version_test_1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,6 +17,7 @@
     "url": "https://tailadmin.com"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "apexcharts": "^3.41.0",
     "flatpickr": "^4.6.13",
     "headlessui": "^0.0.0",
@@ -27,7 +28,7 @@
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
-    "react-router-dom": "^6.14.2",
+    "react-router-dom": "^6.28.1",
     "react-toastify": "^9.1.3",
     "sort-by": "^0.0.2"
   },

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import SidebarLinkGroup from './SidebarLinkGroup';
-import Logo from '../../images/logo/smile.svg';
+import Logo from '../../images/logo/logo.svg';
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -241,7 +241,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           {/* Contracts Menu Item */}
           <li>
             <NavLink
-              to="/contract"
+              to="/contrat"
               className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                 pathname.includes('contracts') && 'bg-graydark dark:bg-meta-4'
               }`}

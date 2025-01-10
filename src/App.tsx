@@ -18,9 +18,13 @@ import Buttons from './pages/UiElements/Buttons';
 import DefaultLayout from './layout/DefaultLayout';
 import Contact from './pages/Contact';
 import Contrat from './pages/Contrat';
-import Utilisateurs from './pages/Utilisateurs';
-import Entreprise from './pages/Entreprise';
-import Partenaire from './pages/Partenaire'; // Import du composant Partenaire
+import Clients from './pages/Client';
+import Prospect from './pages/Prospect'; // Correct path for Prospect page
+import Partenaire from './pages/Partenaire'; // Correct path for Partenaire page
+
+// Import du ContactsProvider et du PartnerProvider
+import { ContactsProvider } from './pages/ContactContext';
+import { PartnerProvider } from './pages/PartnerContext'; // Nouveau contexte pour les partenaires
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -37,163 +41,168 @@ function App() {
   return loading ? (
     <Loader />
   ) : (
-    <DefaultLayout>
-      <Routes>
-        <Route
-          index
-          element={
-            <>
-              <PageTitle title="eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <ECommerce />
-            </>
-          }
-        />
-        <Route
-          path="/contact"
-          element={
-            <>
-              <PageTitle title="Contact | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Contact />
-            </>
-          }
-        />
-        <Route
-          path="/contrat"
-          element={
-            <>
-              <PageTitle title="Contrats | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Contrat />
-            </>
-          }
-        />
-        <Route
-          path="/utilisateurs"
-          element={
-            <>
-              <PageTitle title="Utilisateurs | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Utilisateurs />
-            </>
-          }
-        />
-        <Route
-          path="/entreprise"
-          element={
-            <>
-              <PageTitle title="Entreprise | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Entreprise />
-            </>
-          }
-        />
-        <Route
-          path="/partenaire" // Ajout de la route Partenaire
-          element={
-            <>
-              <PageTitle title="Partenaire | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Partenaire />
-            </>
-          }
-        />
-        <Route
-          path="/calendar"
-          element={
-            <>
-              <PageTitle title="Calendar | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Calendar />
-            </>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <>
-              <PageTitle title="Profile | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Profile />
-            </>
-          }
-        />
-        <Route
-          path="/forms/form-elements"
-          element={
-            <>
-              <PageTitle title="Form Elements | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <FormElements />
-            </>
-          }
-        />
-        <Route
-          path="/forms/form-layout"
-          element={
-            <>
-              <PageTitle title="Form Layout | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <FormLayout />
-            </>
-          }
-        />
-        <Route
-          path="/tables"
-          element={
-            <>
-              <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Tables />
-            </>
-          }
-        />
-        <Route
-          path="/settings"
-          element={
-            <>
-              <PageTitle title="Settings | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Settings />
-            </>
-          }
-        />
-        <Route
-          path="/chart"
-          element={
-            <>
-              <PageTitle title="Basic Chart | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Chart />
-            </>
-          }
-        />
-        <Route
-          path="/ui/alerts"
-          element={
-            <>
-              <PageTitle title="Alerts | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Alerts />
-            </>
-          }
-        />
-        <Route
-          path="/ui/buttons"
-          element={
-            <>
-              <PageTitle title="Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <Buttons />
-            </>
-          }
-        />
-        <Route
-          path="/auth/signin"
-          element={
-            <>
-              <PageTitle title="Signin | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <SignIn />
-            </>
-          }
-        />
-        <Route
-          path="/auth/signup"
-          element={
-            <>
-              <PageTitle title="Signup | TailAdmin - Tailwind CSS Admin Dashboard Template" />
-              <SignUp />
-            </>
-          }
-        />
-      </Routes>
-    </DefaultLayout>
+    // Encapsulation de l'application dans les providers nécessaires
+    <ContactsProvider>
+      <PartnerProvider>
+        <DefaultLayout>
+          <Routes>
+            <Route
+              index
+              element={
+                <>
+                  <PageTitle title="eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <ECommerce />
+                </>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <>
+                  <PageTitle title="Contact | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Contact />
+                </>
+              }
+            />
+            <Route
+              path="/contrat"
+              element={
+                <>
+                  <PageTitle title="Contrat | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Contrat />
+                </>
+              }
+            />
+            <Route
+              path="/clients"
+              element={
+                <>
+                  <PageTitle title="Clients | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Clients />
+                </>
+              }
+            />
+            <Route
+              path="/prospect"
+              element={
+                <>
+                  <PageTitle title="Prospect | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Prospect />
+                </>
+              }
+            />
+            <Route
+              path="/partenaire"
+              element={
+                <>
+                  <PageTitle title="Partenaire | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Partenaire />
+                </>
+              }
+            />
+            <Route
+              path="/calendar"
+              element={
+                <>
+                  <PageTitle title="Calendar | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Calendar />
+                </>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <>
+                  <PageTitle title="Profile | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Profile />
+                </>
+              }
+            />
+            <Route
+              path="/forms/form-elements"
+              element={
+                <>
+                  <PageTitle title="Form Elements | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <FormElements />
+                </>
+              }
+            />
+            <Route
+              path="/forms/form-layout"
+              element={
+                <>
+                  <PageTitle title="Form Layout | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <FormLayout />
+                </>
+              }
+            />
+            <Route
+              path="/tables"
+              element={
+                <>
+                  <PageTitle title="Tables | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Tables />
+                </>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <>
+                  <PageTitle title="Settings | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Settings />
+                </>
+              }
+            />
+            <Route
+              path="/chart"
+              element={
+                <>
+                  <PageTitle title="Basic Chart | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Chart />
+                </>
+              }
+            />
+            <Route
+              path="/ui/alerts"
+              element={
+                <>
+                  <PageTitle title="Alerts | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Alerts />
+                </>
+              }
+            />
+            <Route
+              path="/ui/buttons"
+              element={
+                <>
+                  <PageTitle title="Buttons | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <Buttons />
+                </>
+              }
+            />
+            <Route
+              path="/auth/signin"
+              element={
+                <>
+                  <PageTitle title="Signin | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <SignIn />
+                </>
+              }
+            />
+            <Route
+              path="/auth/signup"
+              element={
+                <>
+                  <PageTitle title="Signup | TailAdmin - Tailwind CSS Admin Dashboard Template" />
+                  <SignUp />
+                </>
+              }
+            />
+          </Routes>
+        </DefaultLayout>
+      </PartnerProvider>
+    </ContactsProvider>
   );
 }
 
