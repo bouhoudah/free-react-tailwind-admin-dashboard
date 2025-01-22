@@ -75,7 +75,13 @@ const Partenaires = () => {
 
         {showForm && (
           <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-999">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full h-full max-w-md overflow-y-auto">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full h-full max-w-md overflow-y-auto relative">
+              <button
+                onClick={() => setShowForm(false)}
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+              >
+                ✖
+              </button>
               <h2 className="text-xl font-bold text-gray-700 mb-4 text-center">
                 Nouveau partenaire
               </h2>

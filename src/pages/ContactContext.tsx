@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 
+
 // Type des contacts
 // Type des contacts
 export interface Contact {
@@ -11,6 +12,13 @@ export interface Contact {
     type: string;
     status: string;
     photo: string;
+  }
+  export interface Contract {
+    id: number;
+    type: string;
+    montantAnnuel: number;
+    dateDebut: string;
+    dateFin: string;
   }
   
 
