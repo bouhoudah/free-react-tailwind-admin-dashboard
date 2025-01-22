@@ -229,6 +229,7 @@ const Prospects = () => {
             <thead className="bg-gray-200">
               <tr>
                 <th className="px-4 py-2">Photo</th>
+                <th className="px-4 py-2">Prenom</th>
                 <th className="px-4 py-2">Nom</th>
                 <th className="px-4 py-2">Email</th>
                 <th className="px-4 py-2">Téléphone</th>
